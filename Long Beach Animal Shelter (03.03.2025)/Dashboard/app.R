@@ -15,7 +15,7 @@ source("Plots.R", local = TRUE)
 
 # Define the UI
 ui <- fluidPage(
-    "Long Beach Animal Shelter Analysis",
+    strong("Long Beach Animal Shelter Analysis"),
     #Data Introduction & Data View----
     navset_tab(
             nav_menu(
@@ -150,8 +150,8 @@ server <- function(input, output) {
     output$Summary <- renderUI({
         HTML(paste("<b>Project Basis</b>
                    <br>- This data has come from the Tidy Tuesday social data project: https://github.com/rfordatascience/tidytuesday
-                   <br>- The purpose in doing was to try different tools & become more profecient in R.
-                   <br>- However, from this project a basic understanding of HTML/Shiny was developed alongside a more thorough understanding of ggplot & Data.Table.
+                   <br>- The purpose in doing this was to try different tools & become more profecient in R.
+                   <br>- From this project a basic understanding of HTML/Shiny was developed alongside a more thorough understanding of ggplot, Data.Table & git.
                    
                    
                    <br>
@@ -164,6 +164,8 @@ server <- function(input, output) {
                    
                    
                    <br>
+                   <br>
+                   <b>Github Repo: https://github.com/TanzeelN/TidyTuesday/tree/main/Long%20Beach%20Animal%20Shelter%20(03.03.2025)
                    
                    
                    "))
