@@ -2,6 +2,7 @@ library(tidyr)
 library(pillar)
 library(data.table)
 library(ggplot2)
+library(here)
 
 
 RescueData <- data.table(Data)
@@ -82,10 +83,13 @@ AgeAtIntakeData <- AgeAtIntakeData[!is.na(age_at_intake), ]
 
 AgeAtIntake <- AgeAtIntakeData[, .(age_at_intake = round(age_at_intake, 2)), by = .(animal_type)]
 AgeAtIntake <- AgeAtIntake[age_at_intake > 0, ]
+AgeAtIntake <- AgeAtIntake[animal_type %in% unique(TopAnimalIntakes$animal_type),]
 
 # Analyzing the top 5 outcomes per animal
 
 
 Outcome <- RescueData[, .(outcome_count = .N), by = .(animal_type, outcome_type)]
 TopOutcomes <- Outcome[, .(outcome_count = sum(outcome_count)), by = .(outcome_type)][order(-outcome_count)][1:7]
-TopOutcomesByAnimal <- Outcome[, .SD[order(-outcome_count)][1:5], by = .(animal_type), .SDcols = c("outcome_type", "outcome_count")]
+TopOutcomesByAnimal <- Outcome[
+    animal_type %in% unique(TopAnimalIntakes$animal_type)& outcome_type %in% unique(TopOutcomes$outcome_type),
+    ]

@@ -40,9 +40,10 @@ ui <- fluidPage(
                       column(6, plotOutput("AgeAtIntake", height = "400px"))
                   ),
                   fluidRow(
-                      htmlOutput("IntakeFindings")
+                      column(6, htmlOutput("IntakeFindings")),
+                      column(6, tableOutput("IntakeTable"))
                   )),
-        
+       
         #Outcome Plots----
         nav_panel("Animal Outcomes",
                   fluidRow(
@@ -65,11 +66,11 @@ server <- function(input, output) {
     output$ActivityByMonth <- renderPlot(PlotOccurencesByMonth)
     output$ActivityByYear <- renderPlot(PlotOccurencesByYear)
     output$ActivityFindings <- renderUI({
-        HTML(paste("<b>Key Findings:</b>
+        HTML(paste("<b>Highlights:</b>
            <br>- Every year appears to develop differently.
            <br>- The largest peaks and troughs for each year seem to be between month 6 & 7.
            <br>- The amount of animal intakes averages (4000) per year excluding 2020 & 2021.
-           <br><span style='margin-left: 10px;'>These years seem to be COVID years, it could be less workforce..</span>"
+           <br><span style='margin-left: 10px;'>Coincidently, COVID did strike in these years, so it could have been an impact to the data..</span>"
                    ))
     })
     
@@ -78,10 +79,15 @@ server <- function(input, output) {
     
     output$TopIntakes <- renderPlot(PlotAnimalIntakes)
     output$AgeAtIntake <- renderPlot(PlotAgeAtIntake)
-    output$IntakeTable <- renderTable(AnimalIntakesTable)
+    output$IntakeTable <- renderTable(AnimalIntakesTable, width = "100%")
     
     output$IntakeFindings <- renderUI({
-        HTML(paste(". "))
+        HTML(paste("<b> Highlights </b>
+                   <br>- Cats & dogs are the largest intakes.
+                   <br>- Birds looks the be third, but wild & other closely follow.
+                   <br>- The age of the animals are all less than 3. However, there are around 4300 NA values which, could make sense as many animals are rescued.
+                   <br>- The table on the bottom right shows all the different animal categories.
+                   "))
     })
     
     
@@ -91,7 +97,9 @@ server <- function(input, output) {
     output$OutcomesByAnimal <- renderPlot(PlotOutcomeByAnimal)
     
     output$OutcomeFindings <- renderUI({
-        HTML(paste(". "))
+        HTML(paste("<b> Highlights </b>
+                   <br>- Majority of animals are rescued/adopted every year.
+                   <br>- An interesting point to highlight is that dogs seem to be the only animal which require to be returned to the owner."))
     })
     
     
@@ -136,7 +144,21 @@ server <- function(input, output) {
     
     #Introduction Tab----
     output$Summary <- renderUI({
-        HTML(paste("This for the Data Introduction,Column Specs & Reference"))
+        HTML(paste("<b>Project Basis</b>
+                   <br>- This data has come from the Tidy Tuesday social data project: https://github.com/rfordatascience/tidytuesday
+                   <br>- The purpose in doing was to try different tools & become more profecient in R.
+                   <br>- However, from this project a basic understanding of HTML/Shiny was developed alongside a more thorough understanding of ggplot & Data.Table.
+                   
+                   
+                   <br>
+                   <br>
+                   <b>The Data </b>
+                   <br>- This data comes from Tidy Tuesday Github Repo, dated 04/03/2025 & https://github.com/rfordatascience/tidytuesday/blob/main/data/2025/2025-03-04/readme.md.
+                   <br>- Further info & where the data was collected from can be found from here: https://www.longbeach.gov/acs/.
+                   <br>- This project looks to utilise some of the fields & create some visualisations.
+                   <br>- The fields specification can be found in the Data View tab.
+                   
+                   "))
     })
     output$DataView <- renderDT(setnames(RescueData[!is.na(dob),.(animal_id,
                                               animal_type,
@@ -151,7 +173,13 @@ server <- function(input, output) {
                                             )],"V10","intake_age"))
 
     output$DataViewComments <- renderUI({
-        HTML(paste("This is the column Specs"))
+        HTML(paste("<b> Field Specification </b>
+                   <br>- animal_type: Category the animal falls into. some generalised categories include 'wild' & 'Livestock'
+                   <br>- sex: Gender of Animal,
+                   <br>- dob: Age of animal. NA entries were frequent.
+                   <br> intake fields: Fields relate to why/why the animal was taken in.
+                   <br> outcome fields: Fields relate to the information relating to the animals outcome.
+                   <br> age_at_intake: Manually calculated variable based on intake_date & dob."))
 })
 
 }

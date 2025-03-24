@@ -14,6 +14,8 @@ custom_theme <- function() {
         )
 }
 
+
+
 # Number of Intakes Per Month
 PlotOccurencesByMonth <- ggplot(
     OccurencesByMonth,
@@ -45,11 +47,11 @@ PlotOccurencesByMonth <- ggplot(
         colour = "Year",
         linetype = ""
     ) +
-    scale_fill_brewer(name = "Set3") +
+    scale_colour_brewer(palette = "Set3") +
     theme_minimal() +
     custom_theme()
 
-
+PlotOccurencesByMonth
 # Number of Intakes Per Year
 PlotOccurencesByYear <- ggplot(
     OccurencesByYear,
@@ -110,6 +112,13 @@ PlotAgeAtIntake <- ggplot(
     theme(legend.position = "none")
 
 # Plot of outcomes
+#Align colour scheme of both plots
+OutcomeFactors <- factor(x = unique(TopOutcomesByAnimal$outcome_type),
+                         levels = c("rescue","adoption","euthanasia","transfer","return to owner","shelter, neuter, return","died"))
+TopOutcomes$outcome_type <- factor(TopOutcomes$outcome_type,
+                                   levels = levels(OutcomeFactors))
+
+
 PlotOutcome <- ggplot(
     TopOutcomes,
     aes(x = factor(outcome_type, levels = TopOutcomes$outcome_type), y = outcome_count, fill = outcome_type)
@@ -121,23 +130,35 @@ PlotOutcome <- ggplot(
         title = "Outcomes",
         x = "Outcome Type",
         y = "Frequency Of Outcome",
-        fill = "Outcome Type"
     ) +
-    custom_theme()
+    theme(
+        plot.title = element_text(hjust = 0.5, face = "bold", size = 14),
+        axis.line = element_line(linetype = "solid", arrow = arrow(length = unit(0.1, "inches"))),
+        legend.position = "none"
+    )
+    
 
 # Plot of Outcomes by Animal
+
+
+TopOutcomesByAnimal$outcome_type <- factor(
+    TopOutcomesByAnimal$outcome_type,
+    levels = levels(OutcomeFactors) 
+)
+
+
 PlotOutcomeByAnimal <- ggplot(
     TopOutcomesByAnimal,
-    aes(x = outcome_type, y = outcome_count, fill = animal_type)
+    aes(x = animal_type, y = outcome_count, fill = outcome_type)
 ) +
     scale_y_continuous(expand = c(0, 0)) +
     scale_fill_brewer(palette = "Set3") +
     geom_col() +
     labs(
         title = "Outcomes by Animal",
-        x = "Outcome Type",
+        x = "Animal",
         y = "Frequency Of Outcome",
-        fill = "Animal"
+        fill = "Outcome_Type"
     ) +
     custom_theme()
 
