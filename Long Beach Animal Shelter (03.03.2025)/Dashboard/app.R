@@ -2,12 +2,16 @@ library(shiny)
 library(here)
 library(bslib)
 library(DT)
-Data <- read.csv(here("Long Beach Animal Shelter (03.03.2025)","Data.csv"))
+library(tidytuesdayR)
+
+#Working Directory needs to be set to app.r
+
+tuesdata <- tidytuesdayR::tt_load('2025-03-04')
+Data <- tuesdata[[1]]
 
 
-
-source(here("Long Beach Animal Shelter (03.03.2025)","Data Processing.R"),local = TRUE)
-source(here("Long Beach Animal Shelter (03.03.2025)","Plots.R"), local = TRUE)
+source("Data Processing.R",local = TRUE)
+source("Plots.R", local = TRUE)
 
 # Define the UI
 ui <- fluidPage(
@@ -157,6 +161,10 @@ server <- function(input, output) {
                    <br>- Further info & where the data was collected from can be found from here: https://www.longbeach.gov/acs/.
                    <br>- This project looks to utilise some of the fields & create some visualisations.
                    <br>- The fields specification can be found in the Data View tab.
+                   
+                   
+                   <br>
+                   
                    
                    "))
     })

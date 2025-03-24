@@ -1,0 +1,12 @@
+name: AnimalShelterDashboard
+title: AnimalShelterDashboard
+username: tanzeelnaz
+account: tanzeelnaz
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 14327471
+bundleId: 9996906
+url: https://tanzeelnaz.shinyapps.io/AnimalShelterDashboard/
+version: 1
+asMultiple: FALSE
+asStatic: FALSE

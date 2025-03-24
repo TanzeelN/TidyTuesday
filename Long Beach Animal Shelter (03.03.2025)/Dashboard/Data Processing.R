@@ -26,7 +26,7 @@ RescueData <- RescueData[
 ColNames <- names(RescueData)
 
 #Changing NA's to Unknown
-RescueData[, (ColNames) := lapply(.SD, function(x) fifelse(is.na(x), "Unknown", x)), .SDcols = ColNames]
+#RescueData[, (ColNames) := lapply(.SD, function(x) fifelse(is.na(x), "Unknown", x)), .SDcols = ColNames]
 
 
 # Changing date fields to date type
