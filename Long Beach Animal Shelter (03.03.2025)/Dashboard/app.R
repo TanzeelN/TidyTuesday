@@ -72,9 +72,9 @@ server <- function(input, output) {
     output$ActivityFindings <- renderUI({
         HTML(paste("<b>Highlights:</b>
            <br>- Every year appears to develop differently.
-           <br>- The largest peaks and troughs for each year seem to be between month 6 & 7.
-           <br>- The amount of animal intakes averages (4000) per year excluding 2020 & 2021.
-           <br><span style='margin-left: 10px;'>Coincidently, COVID did strike in these years, so it could have been an impact to the data..</span>"
+           <br>- The largest peaks and troughs for each year are generally between month 6 & 7.
+           <br>- The amount of animal intakes averages 4000 per year excluding 2020 & 2021.
+           <br><span style='margin-left: 10px;'>Coincidently, COVID did strike in these years, so it could have been an impact to the data.</span>"
                    ))
     })
     
@@ -87,10 +87,10 @@ server <- function(input, output) {
     
     output$IntakeFindings <- renderUI({
         HTML(paste("<b> Highlights </b>
-                   <br>- Cats & dogs are the largest intakes.
-                   <br>- Birds looks the be third, but wild & other closely follow.
-                   <br>- The age of the animals are all less than 3. However, there are around 4300 NA values which, could make sense as many animals are rescued.
-                   <br>- The table on the bottom right shows all the different animal categories.
+                   <br>- The animal shelters greatest intakes of animals are cats & dogs.
+                   <br>- Birds are the third largest intake generally but 'wild' & 'other' closely follow.
+                   <br>- The age of the animals on average are less than 3. However, there are 4300 unknown entries which could be skewing the data.
+                   <br>- The table on the bottom right shows all the different animal categories with how many were taken in by the shelter.
                    "))
     })
     
@@ -102,8 +102,8 @@ server <- function(input, output) {
     
     output$OutcomeFindings <- renderUI({
         HTML(paste("<b> Highlights </b>
-                   <br>- Majority of animals are rescued/adopted every year.
-                   <br>- An interesting point to highlight is that dogs seem to be the only animal which require to be returned to the owner."))
+                   <br>- Rescue & adoption make up majority of the outcomes.
+                   <br>- Dogs seem to be the only animal which require to be returned to the owner."))
     })
     
     
@@ -187,9 +187,9 @@ server <- function(input, output) {
                    <br>- animal_type: Category the animal falls into. some generalised categories include 'wild' & 'Livestock'
                    <br>- sex: Gender of Animal,
                    <br>- dob: Age of animal. NA entries were frequent.
-                   <br> intake fields: Fields relate to why/why the animal was taken in.
-                   <br> outcome fields: Fields relate to the information relating to the animals outcome.
-                   <br> age_at_intake: Manually calculated variable based on intake_date & dob."))
+                   <br>- intake fields: Fields relate to why/why the animal was taken in.
+                   <br>- outcome fields: Fields relate to the information relating to the animals outcome.
+                   <br>- age_at_intake: Manually calculated variable based on intake_date & dob."))
 })
 
 }
