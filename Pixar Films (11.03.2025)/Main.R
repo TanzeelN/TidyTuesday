@@ -145,7 +145,7 @@ PlotSeries <- ggplot(SeriesDataAgg,
               
               geom_text(
                   aes(label = film, vjust = vjust, hjust = hjust),
-                  colour = "#FFB000", size = 2) +
+                  colour = "#FFB000", size = 4) +
               scale_x_continuous(
                   breaks = unique(SeriesDataAgg$series_numeric),
                   labels = unique(SeriesDataAgg$ImageTag),
@@ -166,7 +166,7 @@ PlotSeries <- ggplot(SeriesDataAgg,
                   #Panel Related Formatting
                   panel.background = element_rect(fill = "#1F5673"),
                   panel.grid.major.x = element_blank(),
-                  panel.grid.major.y = element_line(colour = "#C7A9E0",linetype = 8, size = 0.1),
+                  panel.grid.major.y = element_line(colour = "#C7A9E0",linetype = 8, linewidth = 0.1),
                   panel.grid.minor = element_blank(),
                   #Axis Related Formatting
                   axis.text.x = element_markdown(),
